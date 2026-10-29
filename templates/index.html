@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Version Comparison Tool</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #1f2937;
+        margin: 0;
+        padding: 32px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      }
+      h1 { margin-top: 0; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      textarea {
+        width: 100%;
+        min-height: 220px;
+        padding: 14px;
+        border: 1px solid #c7d2fe;
+        border-radius: 8px;
+        font-family: Consolas, monospace;
+        box-sizing: border-box;
+        resize: vertical;
+      }
+      label {
+        display: block;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        box-sizing: border-box;
+      }
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 18px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .error {
+        color: #b91c1c;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 16px;
+      }
+      .hint {
+        color: #475569;
+        font-size: 0.92rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Data Version Comparison Tool</h1>
+        <p class="hint">Compare two JSON/CSV datasets, detect added, removed, and modified records, and restore a selected version.</p>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" action="/compare">
+          <div class="grid">
+            <div>
+              <label for="version_a">Version A</label>
+              <textarea id="version_a" name="version_a" placeholder="Paste JSON array or CSV here, for example: [{\"id\": 1, \"name\": \"Alice\"}]">[{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]</textarea>
+            </div>
+            <div>
+              <label for="version_b">Version B</label>
+              <textarea id="version_b" name="version_b" placeholder="Paste JSON array or CSV here">[{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bobby"}, {"id": 3, "name": "Charlie"}]</textarea>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; max-width: 360px;">
+            <label for="key_field">Primary key field (optional)</label>
+            <input id="key_field" name="key_field" type="text" value="id" placeholder="For example: id, code, email">
+          </div>
+
+          <div style="margin-top: 20px;">
+            <button type="submit">Compare versions</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

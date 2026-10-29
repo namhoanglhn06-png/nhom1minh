@@ -1,0 +1,68 @@
+{
+    "system": "BackupTool Authentication Snapshot",
+    "exported_at": "2026-10-28 18:44:45",
+    "total_accounts": 5,
+    "checksum": "3f35e98962dbc4ae5298e327530e73af2df185ed7e1b40e890134b1892e1ce3d",
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "email": "admin@backuptool.local",
+            "password_hash": "$2y$10$cKDjT8\/tow3pTmjBYZzPn.ZRkxk0v0ovyUSEmXlCD47EeswJk0TjW",
+            "full_name": "Quản Trị Viên Hệ Thống",
+            "role": "ADMIN",
+            "avatar": null,
+            "created_at": "2026-10-26 16:33:32",
+            "last_login": "2026-10-29 00:44:44",
+            "status": "ACTIVE"
+        },
+        {
+            "id": 2,
+            "username": "dev_1793007582",
+            "email": "dev_1793007582@company.local",
+            "password_hash": "$2y$10$TiJVVoga3hqOhQpLdJOx.uNn2EGHBFgYPpR6UvT2oKJfSyvVjM\/0a",
+            "full_name": "Kỹ sư Phần mềm",
+            "role": "OPERATOR",
+            "avatar": null,
+            "created_at": "2026-10-26 16:39:42",
+            "last_login": "2026-10-26 17:23:58",
+            "status": "ACTIVE"
+        },
+        {
+            "id": 5,
+            "username": "dev_1793007614",
+            "email": "dev_1793007614@company.local",
+            "password_hash": "$2y$10$mDQnbbDY5kYmTaVg\/Skjhu8IvJYtcQvAPNWthx\/ZYlEYwYod5QCg6",
+            "full_name": "Kỹ sư Phần mềm",
+            "role": "OPERATOR",
+            "avatar": null,
+            "created_at": "2026-10-26 16:40:14",
+            "last_login": "2026-10-26 16:40:14",
+            "status": "ACTIVE"
+        },
+        {
+            "id": 9,
+            "username": "ahihi",
+            "email": "ullf112@gmail.com",
+            "password_hash": "$2y$10$5JPL.exIuS0e7zHRsJzUXOWtnJdvbydcehQYONTZFz\/KL09b4ArYe",
+            "full_name": "Lê Hoàng Nam",
+            "role": "OPERATOR",
+            "avatar": null,
+            "created_at": "2026-10-26 17:03:55",
+            "last_login": "2026-10-26 17:08:27",
+            "status": "ACTIVE"
+        },
+        {
+            "id": 10,
+            "username": "dev_1793208267",
+            "email": "dev_1793208267@company.local",
+            "password_hash": "$2y$10$TSnkSADceiinaXPv0ujyZewt739wRfT4UKzRkHalkWcM7SOUGwOii",
+            "full_name": "Kỹ sư Phần mềm",
+            "role": "OPERATOR",
+            "avatar": null,
+            "created_at": "2026-10-29 00:24:27",
+            "last_login": "2026-10-29 00:24:27",
+            "status": "ACTIVE"
+        }
+    ]
+}

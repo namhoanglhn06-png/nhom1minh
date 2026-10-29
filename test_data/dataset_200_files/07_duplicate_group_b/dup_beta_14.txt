@@ -1,0 +1,1 @@
+NỘI DUNG TRÙNG LẶP B: Đoạn văn bản mẫu kiểm thử thuật toán deduplication. Dù nằm ở nhiều thư mục khác nhau, hệ thống chỉ lưu đúng 1 bản sao vật lý duy nhất trong kho objects!

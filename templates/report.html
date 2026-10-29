@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comparison Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 18px;
+      }
+      .card {
+        background: white;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        margin-bottom: 24px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .box {
+        border-radius: 10px;
+        padding: 18px;
+        font-weight: 600;
+      }
+      .added { background: #dcfce7; color: #166534; }
+      .removed { background: #fee2e2; color: #991b1b; }
+      .modified { background: #fef3c7; color: #92400e; }
+      .total { background: #dbeafe; color: #1d4ed8; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th, td {
+        border: 1px solid #e2e8f0;
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th { background: #f8fafc; }
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      button, a.button {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .primary { background: #2563eb; color: white; }
+      .secondary { background: #e2e8f0; color: #0f172a; }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Comparison Report</h1>
+        <p><strong>Key field:</strong> {{ report.key_field }}</p>
+        <div class="summary">
+          <div class="box total">Left rows: {{ report.summary.total_left }}</div>
+          <div class="box total">Right rows: {{ report.summary.total_right }}</div>
+          <div class="box added">Added: {{ report.summary.added }}</div>
+          <div class="box removed">Removed: {{ report.summary.removed }}</div>
+          <div class="box modified">Modified: {{ report.summary.modified }}</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Restore a version</h2>
+        <div class="actions">
+          <button class="primary" type="button" onclick="restoreVersion('latest')">Restore latest version</button>
+          <a class="button secondary" href="/">Back to editor</a>
+        </div>
+        <div id="restore-result" style="margin-top: 16px;"></div>
+      </div>
+
+      <div class="card">
+        <h2>Added records</h2>
+        {% if report.added %}
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Record</th></tr>
+          </thead>
+          <tbody>
+            {% for item in report.added %}
+            <tr><td>{{ item.key }}</td><td><pre>{{ item.record | tojson(indent=2) }}</pre></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No added records.</p>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h2>Removed records</h2>
+        {% if report.removed %}
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Record</th></tr>
+          </thead>
+          <tbody>
+            {% for item in report.removed %}
+            <tr><td>{{ item.key }}</td><td><pre>{{ item.record | tojson(indent=2) }}</pre></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No removed records.</p>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h2>Modified records</h2>
+        {% if report.modified %}
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Before</th><th>After</th></tr>
+          </thead>
+          <tbody>
+            {% for item in report.modified %}
+            <tr>
+              <td>{{ item.key }}</td>
+              <td><pre>{{ item.before | tojson(indent=2) }}</pre></td>
+              <td><pre>{{ item.after | tojson(indent=2) }}</pre></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No modified records.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <script>
+      async function restoreVersion(mode) {
+        const resultBox = document.getElementById('restore-result');
+        resultBox.innerHTML = 'Restoring latest version...';
+
+        const response = await fetch('/restore', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'filename=' + encodeURIComponent('{{ snapshot_name }}')
+        });
+
+        const payload = await response.json();
+        if (!response.ok) {
+          resultBox.innerHTML = '<div style="color:#b91c1c; background:#fef2f2; padding:12px; border-radius:8px;">' + payload.error + '</div>';
+          return;
+        }
+
+        const records = payload.restored_records;
+        resultBox.innerHTML = '<pre>' + JSON.stringify(records, null, 2) + '</pre>';
+      }
+    </script>
+  </body>
+</html>

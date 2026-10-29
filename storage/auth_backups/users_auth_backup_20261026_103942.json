@@ -1,0 +1,32 @@
+{
+    "system": "BackupTool Authentication Snapshot",
+    "exported_at": "2026-10-26 10:39:42",
+    "total_accounts": 2,
+    "checksum": "4039132148669db6b1f3a360057864396c2cc18bcb2999f3261dda49d85b8244",
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "email": "admin@backuptool.local",
+            "password_hash": "$2y$10$cKDjT8\/tow3pTmjBYZzPn.ZRkxk0v0ovyUSEmXlCD47EeswJk0TjW",
+            "full_name": "Quản Trị Viên Hệ Thống",
+            "role": "ADMIN",
+            "avatar": null,
+            "created_at": "2026-10-26 16:33:32",
+            "last_login": "2026-10-26 16:39:42",
+            "status": "ACTIVE"
+        },
+        {
+            "id": 2,
+            "username": "dev_1793007582",
+            "email": "dev_1793007582@company.local",
+            "password_hash": "$2y$10$TiJVVoga3hqOhQpLdJOx.uNn2EGHBFgYPpR6UvT2oKJfSyvVjM\/0a",
+            "full_name": "Kỹ sư Phần mềm",
+            "role": "OPERATOR",
+            "avatar": null,
+            "created_at": "2026-10-26 16:39:42",
+            "last_login": "2026-10-26 16:39:42",
+            "status": "ACTIVE"
+        }
+    ]
+}

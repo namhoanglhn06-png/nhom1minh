@@ -1,0 +1,1 @@
+NỘI DUNG TRÙNG LẶP A: Đây là nội dung chuẩn để kiểm tra tính năng khử trùng lặp vật lý (Content-Addressable Storage). Mã băm SHA-256 sẽ giống nhau hoàn toàn giữa các tệp này!
